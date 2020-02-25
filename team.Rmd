@@ -1,6 +1,6 @@
 ---
 title: "team"
-author: "Matthew Coulibaly"
+author: "Matthew Coulibaly and Orion Hunter"
 date: "2/25/2020"
 output: html_document
 ---
@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 install.packages('readxl')
-dat <- readxl::read_xls('GSS.xls')
+dat <- readxl::read_xls('D:\\Documents\\ds202_lab3\\ds202_lab3\\GSS.xls')
 head(dat)
 library(ggplot2)
 veryhappy = dat[dat$`General happiness` == 'Very happy',]
@@ -24,4 +24,38 @@ table(dat$`General happiness`)
 # What percentage of married people were not too happy compared to never married?
 # Are men or women generally happier/healthier?
 # Is there a relationship between health and happiness?
+```
+How does the happiness of a respondent relate to the marriage status?
+```{r}
+dat <- readxl::read_xls('D:\\Documents\\ds202_lab3\\ds202_lab3\\GSS.xls')
+library(ggplot2)
+veryhappy = dat[dat$`General happiness` == 'Very happy',]
+table(veryhappy$`Marital status`)
+barplot(table(veryhappy$`Marital status`))
+nothappy = dat[dat$`General happiness` == 'Not too happy',]
+table(nothappy$`Marital status`)
+barplot(table(nothappy$`Marital status`))
+table(dat$`General happiness`)
+```
+# # Married respondents make up the majority of both very happy and not too happy,never married respondents are the second highest in both not too happy and very happy,divorced respondents make up the third largest very happy. This leads us to believe that married respondents are the happiest and also the least happy out of all the respondents, it should be noted that the amount of very happy married respondents seems to be 6 times the amount of not too happy married respondents. 
+
+Does the sex of the respondent affect the relationship you found in Q1?
+```{r}
+dat <- readxl::read_xls('D:\\Documents\\ds202_lab3\\ds202_lab3\\GSS.xls')
+male = dat[dat$`Respondents sex` == 'Male',]
+table(male$`Marital status`)
+barplot(table(male$`Marital status`))
+table(male$`General happiness`)
+barplot(table(male$`General happiness`))
+female = dat[dat$`Respondents sex` == 'Female',]
+table(female$`Marital status`)
+barplot(table(female$`Marital status`))
+table(female$`General happiness`)
+barplot(table(female$`General happiness`))
+```
+# # Female respondents have a higher amount of responses in the Very happy column compared to the male respondents. There seems to be a higher amount of female respondents than male respondents so this might skew the data. This leads us to believe that the sex of the respondent does affect the relationship found in question 1.
+
+How does the happiness of a respondent relate to the political party affiliation?
+```{r}
+dat <- readxl::read_xls('D:\\Documents\\ds202_lab3\\ds202_lab3\\GSS.xls')
 ```
