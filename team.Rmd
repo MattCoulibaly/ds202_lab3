@@ -1,0 +1,27 @@
+---
+title: "team"
+author: "Matthew Coulibaly"
+date: "2/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+install.packages('readxl')
+dat <- readxl::read_xls('GSS.xls')
+head(dat)
+library(ggplot2)
+veryhappy = dat[dat$`General happiness` == 'Very happy',]
+table(veryhappy$`Marital status`)
+barplot(table(veryhappy$`Marital status`))
+nothappy = dat[dat$`General happiness` == 'Not too happy',]
+table(nothappy$`Marital status`)
+barplot(table(nothappy$`Marital status`))
+table(dat$`General happiness`)
+# What percentage of married people were not too happy compared to never married?
+# Are men or women generally happier/healthier?
+# Is there a relationship between health and happiness?
+```
