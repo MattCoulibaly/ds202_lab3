@@ -14,16 +14,44 @@ install.packages('readxl')
 dat <- readxl::read_xls('D:\\Documents\\ds202_lab3\\ds202_lab3\\GSS.xls')
 head(dat)
 library(ggplot2)
-veryhappy = dat[dat$`General happiness` == 'Very happy',]
-table(veryhappy$`Marital status`)
-barplot(table(veryhappy$`Marital status`))
-nothappy = dat[dat$`General happiness` == 'Not too happy',]
-table(nothappy$`Marital status`)
-barplot(table(nothappy$`Marital status`))
-table(dat$`General happiness`)
 # What percentage of married people were not too happy compared to never married?
-# Are men or women generally happier/healthier?
+married = dat[dat$`Marital status` == 'Married',]
+msad = dat[dat$`Marital status` == 'Married' & dat$`General happiness` == 'Not too happy',]
+marriednothappyrate = nrow(msad) / nrow(married)
+notmarried = dat[dat$`Marital status` == 'Never married',]
+notmsad = dat[dat$`Marital status` == 'Never married' & dat$`General happiness` == 'Not too happy',]
+notmarriednothappyrate = nrow(notmsad) / nrow(notmarried)
+marriednothappyrate
+notmarriednothappyrate
+# In this dataset the percentage of married people who were not too happy was half as much as people who were never married and not too happy. Approximately 7% of married people are not too happy. While 14% of never married people were not too happy. 
+
+
+# Are men or women generally healthier?
+men = dat[dat$`Respondents sex` == 'Male',]
+women = dat[dat$`Respondents sex` != 'Male',]
+table(men$`Condition of health`)
+table(women$`Condition of health`)
+barplot(table(men$`Condition of health`))
+barplot(table(women$`Condition of health`))
+exelmenrate = nrow(men[men$`Condition of health` == 'Excellent',]) / nrow(men)
+exelwomenrate = nrow(women[women$`Condition of health` == 'Excellent',]) / nrow(men)
+poormenrate = nrow(men[men$`Condition of health` == 'Poor',]) / nrow(men)
+poorwomenrate = nrow(women[women$`Condition of health` == 'Poor',]) / nrow(men)
+exelmenrate
+exelwomenrate
+poormenrate
+poorwomenrate
+# In this dataset, men and women are very similar when it comes to health. For example, 23% of the men in this dataset are in excellent health conditions while 26.6% of the women are in excellent health conditions.On the other hand, 3.8% of the men are in poor health conditions while 5.7% of women are in poor health.Men and women are very closely related healthwise in this dataset, but women are slightly healthier and unhealthier than men.
+
+
 # Is there a relationship between health and happiness?
+vhappy = dat[dat$`General happiness` == 'Very happy',]
+nothappy = dat[dat$`General happiness` == 'Not too happy', ]
+table(vhappy$`Condition of health`)
+table(nothappy$`Condition of health`)
+barplot(table(vhappy$`Condition of health`))
+barplot(table(nothappy$`Condition of health`))
+# In this dataset there is a strong relationship between health and happiness. Very happy people have more than six times the people in  excellent health than not too happy people. Very happy people also have half the amount of people in poor health than not too happy people.In conclusion, health and happyness are strongly related in this dataset because there are exponentially more very happy people in excellent health than in poor health. While not too happy people have more people in poor health than in excellent health.
 ```
 How does the happiness of a respondent relate to the marriage status?
 ```{r}
